@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+
+  seq:
+    image: datalust/seq:5.1.3200
+    container_name: seq
+    ports:
+      - "5342:5341"
+      - "8001:80"
+    environment:
+      - ACCEPT_EULA=Y
+
+  eventstore:
+    image: eventstore/eventstore:release-5.0.2
+    container_name: eventstore
+    environment:
+      - EVENTSTORE_START_STANDARD_PROJECTIONS=TRUE
+      - EVENTSTORE_RUN_PROJECTIONS=All
+    ports:
+      - "2113:2113"
+      - "1113:1113"
